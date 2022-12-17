@@ -1,96 +1,707 @@
-local a=game:GetService'Players'local b=game:GetService'Workspace'local c=game:
-GetService'ContentProvider'local d=game:GetService'CoreGui'do local e e=
-hookfunction(c.PreloadAsync,function(f,g,h)if table.find(g,d)then local i=
-function(i,j)if i:match'^rbxasset://'or i:match'^rbxthumb://'then return h(i,j)
-end end warn'Anticheat Check Detected'return e(f,g,i)end return e(f,g,h)end)end
-local e=[[https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/]]local f
-=loadstring(game:HttpGet(e..'Library.lua'))()local g=loadstring(game:HttpGet(e..
-'addons/SaveManager.lua'))()local h=loadstring(game:HttpGet(e..
-'addons/ThemeManager.lua'))()local i=syn and syn.protect_gui or function(i)end
-local j=a.LocalPlayer local k={['Beat']=true,['Creak']=true,['Door']=true,[
-'Doorknob']=true,['Ghost']=true,['Window Knock']=true}local l=10 local m={}local
-n={}local o={}local p=function(p)if p then local q=p:FindFirstChild
-'HumanoidRootPart'if q then local r=p:FindFirstChild'Humanoid'return r~=nil end
-end return false end local q do q={}q.__index=q function q.new(r)local s=
-setmetatable({instance=r,destructed=false},q)s.instance.AncestryChanged:Connect(
-function(t,u)if u==nil then s:destroy()end end)return s:constructor(r)end
-function q.constructor(r,s)r.cham=Instance.new'BoxHandleAdornment'task.defer(r.
-onStart,r)return r end function q.onStart(r)local s=r.instance local t=s:
-WaitForChild('FigureRagdoll',2.5)local u=t:WaitForChild('Root',2.5)local v=r.
-cham n[v]=true v.Visible=Toggles.FIGURE_CHAMS.Value v.Color3=Color3.new(1,0,0)v.
-Transparency=0.25 v.Size=Vector3.new(2,5,2)v.AlwaysOnTop=true v.ZIndex=5 v.
-Adornee=u v.RobloxLocked=true v.Parent=u end function q.destroy(r)if r.
-destructed then return else r.destructed=true end r.cham:Destroy()n[r.cham]=nil
-end end local r do r={}r.__index=r function r.new(s)local t=setmetatable({
-instance=s,destructed=false},r)t.instance.AncestryChanged:Connect(function(u,v)
-if v==nil then t:destroy()end end)return t:constructor(s)end function r.
-constructor(s,t)s.cham=Instance.new'BoxHandleAdornment'task.defer(s.onStart,s)
-return s end function r.onStart(s)local t=s.instance local u=s.cham o[u]=true u.
-Visible=Toggles.INTERACT_CHAMS.Value u.Color3=Color3.new(1,1,1)u.Transparency=
-0.5 u.Size=t.Size+Vector3.new(0.1,0.1,0.1)u.AlwaysOnTop=true u.ZIndex=5 u.
-Adornee=t u.RobloxLocked=true u.Parent=d end function r.destroy(s)if s.
-destructed then return else s.destructed=true end s.cham:Destroy()o[s.cham]=nil
-end end local s do s={}s.__index=s function s.new(t)local u=setmetatable({
-instance=t,destructed=false},s)u.instance.AncestryChanged:Connect(function(v,w)
-if w==nil then u:destroy()end end)return u:constructor(t)end function s.
-constructor(t,u)task.defer(t.onStart,t)return t end function s.onStart(t)local u
-=t.instance repeat if u.Name=='50'then t:onRoom50()break end if u.Name=='100'
-then t:onRoom100()break end until true end function s.onRoom50(t)local u=t.
-instance local v=u:WaitForChild('FigureSetup',2.5)local w=q.new(v)local x=
-function(x)if x.Name=='Super Cool Bookshelf With Hint Book'then local y=x:
-WaitForChild('LiveHintBook',2.5)if y then local z=y:WaitForChild('Base',2.5)if z
-then r.new(z)end end end end for y,z in ipairs(u.Assets:GetChildren())do task.
-defer(x,z)end u.Assets.ChildAdded:Connect(x)end function s.onRoom100(t)local u=t
-.instance local v=u:WaitForChild('FigureSetup',2.5)local w=q.new(v)end function
-s.destroy(t)if t.destructed then return else t.destructed=true end end end local
-t=function(t)local u=s.new(t)end local u=function(u)while not p(u)do u.
-DescendantAdded:Wait()end l=u.Humanoid.WalkSpeed u.Humanoid.WalkSpeed=u.Humanoid
-.WalkSpeed+Options.WALKSPEED.Value end local v=function(v)if v:IsA'Attachment'
-then if Toggles.REMOVE_AMBIENCE.Value then local w for x=1,10 do w=v:
-FindFirstChildWhichIsA'Sound'if w then break end task.wait()end if w then if k[w
-.Name]then w.Volume=0 print(w.Name)end end end end end local w=function(w)if w.
-Name=='RushMoving'then if Toggles.EVENT_NOTIFIER.Value then f:Notify
-'[Event Notifier]: Rush spawned, hide quickly!'end end end f:SetWatermark
-'KAO is Number 1 (Premium)'f:Notify'Loading UI...'do local x=f:
-CreateWindow'Doors'do local y=x:AddTab'Gameplay'do local z=y:AddLeftTabbox
-'Modifications'local A=z:AddTab'Character Mods'A:AddSlider('WALKSPEED',{Text=
-'Speed Boost',Min=0,Max=10,Default=0,Rounding=1,Suffix=''})A:AddToggle(
-'GLOW_ENABLED',{Text='Body Glow',Default=false,Tooltip=
-'Adds a subtle glow for better vision'})local B=z:AddTab'World Mods'B:AddToggle(
-'REMOVE_AMBIENCE',{Text='Remove Ambience',Default=false,Tooltip=
-'Removes the unnecessary sounds from the world'})end do local z=y:
-AddRightGroupbox'Notifiers'z:AddToggle('EVENT_NOTIFIER',{Text='Event Notifier',
-Default=true,Tooltip='Notifies you when certain events occur'})end end do local
-y=x:AddTab'Visuals'do local z=y:AddLeftTabbox'Visuals'local A=z:AddTab'Entities'
-A:AddToggle('FIGURE_CHAMS',{Text='Figure Chams',Default=true,Tooltip=
-'Figure ESP'})local B=z:AddTab'Objects'B:AddToggle('INTERACT_CHAMS',{Text=
-'Interactable Chams',Default=true,Tooltip='ESP for items that can be picked up'}
-)end do local z=y:AddRightGroupbox'World Render'end end do local y=x:AddTab
-'Settings'h:SetLibrary(f)g:SetLibrary(f)h:SetFolder'OminousVibes'g:SetFolder
-'OminousVibes/doors'g:IgnoreThemeSettings()g:SetIgnoreIndexes{'MenuKeybind'}g:
-BuildConfigSection(y)h:ApplyToTab(y)local z=y:AddLeftGroupbox'Menu'z:AddButton(
-'Unload',function()f:Unload()end)z:AddLabel'Menu bind':AddKeyPicker(
-'MenuKeybind',{Default='End',NoUI=true,Text='Menu keybind'})z:AddToggle(
-'Keybinds',{Text='Show Keybinds Menu',Default=true}):OnChanged(function()f.
-KeybindFrame.Visible=Toggles.Keybinds.Value end)z:AddToggle('Watermark',{Text=
-'Show Watermark',Default=true}):OnChanged(function()f:SetWatermarkVisibility(
-Toggles.Watermark.Value)end)end end f:Notify'UI Loaded'j.CharacterAdded:Connect(
-u)b.ChildAdded:Connect(w)b.Terrain.ChildAdded:Connect(v)b.CurrentRooms.
-ChildAdded:Connect(t)do do Options.WALKSPEED:OnChanged(function(x)local y=j.
-Character if p(y)then y.Humanoid.WalkSpeed=l+Options.WALKSPEED.Value end end)
-Toggles.GLOW_ENABLED:OnChanged(function()for x,y in ipairs(m)do y:Destroy()end
-if Toggles.GLOW_ENABLED.Value then local z=Instance.new'PointLight'local A=
-Instance.new'SurfaceLight'z.Brightness=0.75 A.Brightness=0.25 z.Range=20 A.Range
-=90 m={z,A}i(z)i(A)z.Parent=j.Character.HumanoidRootPart A.Parent=j.Character.
-Head else m={}end end)end do Toggles.FIGURE_CHAMS:OnChanged(function()for x,y in
-pairs(n)do x.Visible=Toggles.FIGURE_CHAMS.Value end end)Toggles.INTERACT_CHAMS:
-OnChanged(function()for x,y in ipairs(o)do y.Visible=Toggles.INTERACT_CHAMS.
-Value end end)end end do local x local y local z=typeof local A,B=Vector3.new,
-math.random local C=game.IsA x=hookmetamethod(game,'__index',function(D,E)if not
-checkcaller()then if z(D)=='Instance'then if C(D,'Humanoid')then if E==
-'WalkSpeed'then return l end end end end return x(D,E)end)y=hookmetamethod(game,
-'__newindex',function(D,E,F)if not checkcaller()then if z(D)=='Instance'then if
-C(D,'Humanoid')then if E=='WalkSpeed'then l=F return y(D,E,F+Options.WALKSPEED.
-Value)end end end end return y(D,E,F)end)end do local x=j.Character if x then u(
-x)end end do for x,y in ipairs(b.CurrentRooms:GetChildren())do task.defer(t,y)
-end end return f:Notify'[Doors] Loaded!'
+--Greetings, these little notes will be scattered around to insure you touch the right things to add function to your wonderful GUI!
+
+-- Instances:
+--Don't bother touching this.
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local UIStroke = Instance.new("UIStroke")
+local Title = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local UpdateLogTitle = Instance.new("TextLabel")
+local UICorner_2 = Instance.new("UICorner")
+local UIStroke_2 = Instance.new("UIStroke")
+local UICorner_3 = Instance.new("UICorner")
+local UpdateLogsScrollingFrame = Instance.new("ScrollingFrame")
+local UIStroke_3 = Instance.new("UIStroke")
+local AlphaReleaseText = Instance.new("TextLabel")
+local UICorner_4 = Instance.new("UICorner")
+local UIStroke_4 = Instance.new("UIStroke")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local ScriptsScrollingFrame = Instance.new("ScrollingFrame")
+local UIStroke_5 = Instance.new("UIStroke")
+local Button1 = Instance.new("TextButton")
+local UIStroke_6 = Instance.new("UIStroke")
+local UICorner_5 = Instance.new("UICorner")
+local Button2 = Instance.new("TextButton")
+local UIStroke_7 = Instance.new("UIStroke")
+local UICorner_6 = Instance.new("UICorner")
+local Button3 = Instance.new("TextButton")
+local UIStroke_8 = Instance.new("UIStroke")
+local UICorner_7 = Instance.new("UICorner")
+local Button4 = Instance.new("TextButton")
+local UIStroke_9 = Instance.new("UIStroke")
+local UICorner_8 = Instance.new("UICorner")
+local Button5 = Instance.new("TextButton")
+local UIStroke_10 = Instance.new("UIStroke")
+local UICorner_9 = Instance.new("UICorner")
+local Button6 = Instance.new("TextButton")
+local UIStroke_11 = Instance.new("UIStroke")
+local UICorner_10 = Instance.new("UICorner")
+local Button7 = Instance.new("TextButton")
+local UIStroke_12 = Instance.new("UIStroke")
+local UICorner_11 = Instance.new("UICorner")
+local Button8 = Instance.new("TextButton")
+local UIStroke_13 = Instance.new("UIStroke")
+local UICorner_12 = Instance.new("UICorner")
+local Button9 = Instance.new("TextButton")
+local UIStroke_14 = Instance.new("UIStroke")
+local UICorner_13 = Instance.new("UICorner")
+local Button10 = Instance.new("TextButton")
+local UIStroke_15 = Instance.new("UIStroke")
+local UICorner_14 = Instance.new("UICorner")
+local SeperatorInfo1 = Instance.new("TextLabel")
+local UICorner_15 = Instance.new("UICorner")
+local UIStroke_16 = Instance.new("UIStroke")
+local Button12 = Instance.new("TextButton")
+local UIStroke_17 = Instance.new("UIStroke")
+local UICorner_16 = Instance.new("UICorner")
+local Button11 = Instance.new("TextButton")
+local UIStroke_18 = Instance.new("UIStroke")
+local UICorner_17 = Instance.new("UICorner")
+local Button13 = Instance.new("TextButton")
+local UIStroke_19 = Instance.new("UIStroke")
+local UICorner_18 = Instance.new("UICorner")
+local Button14 = Instance.new("TextButton")
+local UIStroke_20 = Instance.new("UIStroke")
+local UICorner_19 = Instance.new("UICorner")
+local Button15 = Instance.new("TextButton")
+local UIStroke_21 = Instance.new("UIStroke")
+local UICorner_20 = Instance.new("UICorner")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local ExitButton = Instance.new("ImageButton")
+local UIStroke_22 = Instance.new("UIStroke")
+local UICorner_21 = Instance.new("UICorner")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+local OpenUIFrame = Instance.new("Frame")
+local UICorner_22 = Instance.new("UICorner")
+local UIStroke_23 = Instance.new("UIStroke")
+local ButtonOpen = Instance.new("TextButton")
+local UICorner_23 = Instance.new("UICorner")
+local UIStroke_24 = Instance.new("UIStroke")
+local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+MainFrame.BackgroundTransparency = 0.250
+MainFrame.Position = UDim2.new(0.0510795116, 0, 0.0946698338, 0)
+MainFrame.Size = UDim2.new(0, 627, 0, 420)
+MainFrame.Visible = true
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+UIStroke.Parent = MainFrame
+UIStroke.Color = Color3.fromRGB(255, 222, 189)
+UIStroke.Thickness = 2.000
+UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+--You may edit properties like this such as Title.Text "Whatever you want here"
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+Title.BackgroundTransparency = 0.800
+Title.Position = UDim2.new(-1.51395798e-05, 0, -0.00215145946, 0)
+Title.Size = UDim2.new(0, 627, 0, 67)
+Title.Font = Enum.Font.Cartoon
+Title.Text = "Neon Hub"
+Title.TextColor3 = Color3.fromRGB(255, 222, 189)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+
+UICorner.Parent = Title
+
+UpdateLogTitle.Name = "Update Log Title"
+UpdateLogTitle.Parent = MainFrame
+UpdateLogTitle.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+UpdateLogTitle.BackgroundTransparency = 0.800
+UpdateLogTitle.Position = UDim2.new(0.0255031567, 0, 0.182730898, 0)
+UpdateLogTitle.Size = UDim2.new(0, 183, 0, 51)
+UpdateLogTitle.Font = Enum.Font.Cartoon
+UpdateLogTitle.Text = "Update Log"
+UpdateLogTitle.TextColor3 = Color3.fromRGB(255, 222, 189)
+UpdateLogTitle.TextScaled = true
+UpdateLogTitle.TextSize = 14.000
+UpdateLogTitle.TextWrapped = true
+
+UICorner_2.Parent = UpdateLogTitle
+
+UIStroke_2.Parent = UpdateLogTitle
+UIStroke_2.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_2.Thickness = 1.500
+UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_3.Parent = MainFrame
+
+UpdateLogsScrollingFrame.Name = "UpdateLogsScrollingFrame"
+UpdateLogsScrollingFrame.Parent = MainFrame
+UpdateLogsScrollingFrame.Active = true
+UpdateLogsScrollingFrame.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+UpdateLogsScrollingFrame.BackgroundTransparency = 0.800
+UpdateLogsScrollingFrame.Position = UDim2.new(0.0287081338, 0, 0.321428567, 0)
+UpdateLogsScrollingFrame.Size = UDim2.new(0, 177, 0, 272)
+UpdateLogsScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+UpdateLogsScrollingFrame.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIStroke_3.Parent = UpdateLogsScrollingFrame
+UIStroke_3.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+AlphaReleaseText.Name = "\"AlphaRelease\"Text"
+AlphaReleaseText.Parent = UpdateLogsScrollingFrame
+AlphaReleaseText.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+AlphaReleaseText.BackgroundTransparency = 0.800
+AlphaReleaseText.Position = UDim2.new(0.144147098, 0, 0.0163834803, 0)
+AlphaReleaseText.Size = UDim2.new(0, 141, 0, 51)
+AlphaReleaseText.Font = Enum.Font.Cartoon
+AlphaReleaseText.Text = "Alpha Release!"
+AlphaReleaseText.TextColor3 = Color3.fromRGB(255, 222, 189)
+AlphaReleaseText.TextScaled = true
+AlphaReleaseText.TextSize = 14.000
+AlphaReleaseText.TextWrapped = true
+
+UICorner_4.Parent = AlphaReleaseText
+
+UIStroke_4.Parent = AlphaReleaseText
+UIStroke_4.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_4.Thickness = 1.500
+UIStroke_4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UIAspectRatioConstraint.Parent = UpdateLogsScrollingFrame
+UIAspectRatioConstraint.AspectRatio = 0.651
+
+ScriptsScrollingFrame.Name = "ScriptsScrollingFrame"
+ScriptsScrollingFrame.Parent = MainFrame
+ScriptsScrollingFrame.Active = true
+ScriptsScrollingFrame.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+ScriptsScrollingFrame.BackgroundTransparency = 0.800
+ScriptsScrollingFrame.Position = UDim2.new(0.35725677, 0, 0.180952385, 0)
+ScriptsScrollingFrame.Size = UDim2.new(0, 386, 0, 331)
+ScriptsScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+ScriptsScrollingFrame.CanvasPosition = Vector2.new(0, 299)
+ScriptsScrollingFrame.CanvasSize = UDim2.new(0, 0, 1.5, 0)
+
+UIStroke_5.Parent = ScriptsScrollingFrame
+UIStroke_5.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+--You replace the print("Script Here") with whatever you like such as a loadstring or script!
+--Don't forget you can edit the names of the button!
+ 
+Button1.Name = "Button1"
+Button1.Parent = ScriptsScrollingFrame
+Button1.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button1.BackgroundTransparency = 0.800
+Button1.Position = UDim2.new(0.0284974091, 0, 0.0194322504, 0)
+Button1.Size = UDim2.new(0, 170, 0, 50)
+Button1.Font = Enum.Font.Cartoon
+Button1.Text = "Crucifix"
+Button1.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button1.TextScaled = true
+Button1.TextSize = 14.000
+Button1.TextWrapped = true
+Button1.MouseButton1Down:connect(function()
+	local Item = game:GetObjects("rbxassetid://11712848097")[1]
+Item.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+UIStroke_6.Parent = Button1
+UIStroke_6.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_6.Thickness = 1.100
+UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_5.Parent = Button1
+
+Button2.Name = "Button2"
+Button2.Parent = ScriptsScrollingFrame
+Button2.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button2.BackgroundTransparency = 0.800
+Button2.Position = UDim2.new(0.49999997, 0, 0.0194322504, 0)
+Button2.Size = UDim2.new(0, 170, 0, 50)
+Button2.Font = Enum.Font.Cartoon
+Button2.Text = "Skeleton Key[BUG]"
+Button2.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button2.TextScaled = true
+Button2.TextSize = 14.000
+Button2.TextWrapped = true
+Button2.MouseButton1Down:connect(function()
+	function skelly()
+            local DoorReplication = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Door%20Replication/Source.lua"))()
+        
+        
+        -- Get current room
+        local room = workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+        
+        
+        -- Replicate door
+        local replicatedDoor = DoorReplication.ReplicateDoor(room, {
+            CustomKeyName = "Skeleton Key",
+            DestroyKey = false,
+        })
+        
+        
+        -- Debug features [advanced]
+        replicatedDoor.Debug.OnDoorOpened = function(doorTable)
+            warn("Door", doorTable.Model, "has opened")
+        end
+        end
+        local DoorReplication = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Door%20Replication/Source.lua"))()
+        
+        
+        -- Get current room
+        local room = workspace.CurrentRooms[game:GetService("ReplicatedStorage").GameData.LatestRoom.Value]
+        
+        
+        -- Replicate door
+        local replicatedDoor = DoorReplication.ReplicateDoor(room, {
+            CustomKeyName = "Skeleton Key",
+            DestroyKey = false,
+        })
+        
+        
+        -- Debug features [advanced]
+        replicatedDoor.Debug.OnDoorOpened = function(doorTable)
+            warn("Door", doorTable.Model, "has opened")
+        end
+                local shadow=game:GetObjects("rbxassetid://11491147151")[1]
+        shadow.Parent = game.Players.LocalPlayer.Backpack
+        local anim = Instance.new("Animation")
+        local anim2 = Instance.new("Animation")
+        anim.AnimationId = 'https://www.roblox.com/Assest?ID=6525854363'
+        anim2.AnimationId = 'https://www.roblox.com/Assest?ID=10526835827'
+        local track
+         
+        shadow.Equipped:Connect(function()
+            track = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(anim) 
+                track.Priority = Enum.AnimationPriority.Action
+                track:Play()
+                track.Looped = false
+                wait(1.4)
+            track2 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(anim2) 
+                track2.Priority = Enum.AnimationPriority.Action
+                track2:Play()
+                track2.Looped = false
+         
+        end)
+         
+        shadow.Unequipped:Connect(function()
+            if track then
+                track:Stop()
+                track2:Stop()
+            end
+        end)
+        game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+            if workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value].Door:FindFirstChild("Lock") then
+                print("YES KEY")
+           skelly()
+           else
+               print("no.")
+        end
+        end)
+end)
+
+UIStroke_7.Parent = Button2
+UIStroke_7.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_7.Thickness = 1.100
+UIStroke_7.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_6.Parent = Button2
+
+Button3.Name = "Button3"
+Button3.Parent = ScriptsScrollingFrame
+Button3.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button3.BackgroundTransparency = 0.800
+Button3.Position = UDim2.new(0.0259066951, 0, 0.115860835, 0)
+Button3.Size = UDim2.new(0, 170, 0, 50)
+Button3.Font = Enum.Font.Cartoon
+Button3.Text = "Secret Room[Android may won't work]"
+Button3.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button3.TextScaled = true
+Button3.TextSize = 14.000
+Button3.TextWrapped = true
+Button3.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAccelerator/CometRestoration/main/Skeletonkey.lua"))()
+end)
+
+UIStroke_8.Parent = Button3
+UIStroke_8.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_8.Thickness = 1.100
+UIStroke_8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_7.Parent = Button3
+
+Button4.Name = "Button4"
+Button4.Parent = ScriptsScrollingFrame
+Button4.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button4.BackgroundTransparency = 0.800
+Button4.Position = UDim2.new(0.497409284, 0, 0.115860835, 0)
+Button4.Size = UDim2.new(0, 170, 0, 50)
+Button4.Font = Enum.Font.Cartoon
+Button4.Text = "Rename Me!"
+Button4.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button4.TextScaled = true
+Button4.TextSize = 14.000
+Button4.TextWrapped = true
+Button4.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_9.Parent = Button4
+UIStroke_9.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_9.Thickness = 1.100
+UIStroke_9.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_8.Parent = Button4
+
+Button5.Name = "Button5"
+Button5.Parent = ScriptsScrollingFrame
+Button5.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button5.BackgroundTransparency = 0.800
+Button5.Position = UDim2.new(0.031088043, 0, 0.213083059, 0)
+Button5.Size = UDim2.new(0, 170, 0, 50)
+Button5.Font = Enum.Font.Cartoon
+Button5.Text = "Rename Me!"
+Button5.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button5.TextScaled = true
+Button5.TextSize = 14.000
+Button5.TextWrapped = true
+Button5.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_10.Parent = Button5
+UIStroke_10.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_10.Thickness = 1.100
+UIStroke_10.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_9.Parent = Button5
+
+Button6.Name = "Button6"
+Button6.Parent = ScriptsScrollingFrame
+Button6.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button6.BackgroundTransparency = 0.800
+Button6.Position = UDim2.new(0.497409284, 0, 0.213083059, 0)
+Button6.Size = UDim2.new(0, 170, 0, 50)
+Button6.Font = Enum.Font.Cartoon
+Button6.Text = "Rename Me!"
+Button6.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button6.TextScaled = true
+Button6.TextSize = 14.000
+Button6.TextWrapped = true
+Button6.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_11.Parent = Button6
+UIStroke_11.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_11.Thickness = 1.100
+UIStroke_11.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_10.Parent = Button6
+
+Button7.Name = "Button7"
+Button7.Parent = ScriptsScrollingFrame
+Button7.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button7.BackgroundTransparency = 0.800
+Button7.Position = UDim2.new(0.0284973681, 0, 0.30990845, 0)
+Button7.Size = UDim2.new(0, 170, 0, 50)
+Button7.Font = Enum.Font.Cartoon
+Button7.Text = "Rename Me!"
+Button7.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button7.TextScaled = true
+Button7.TextSize = 14.000
+Button7.TextWrapped = true
+Button7.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_12.Parent = Button7
+UIStroke_12.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_12.Thickness = 1.100
+UIStroke_12.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_11.Parent = Button7
+
+Button8.Name = "Button8"
+Button8.Parent = ScriptsScrollingFrame
+Button8.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button8.BackgroundTransparency = 0.800
+Button8.Position = UDim2.new(0.49999997, 0, 0.30990845, 0)
+Button8.Size = UDim2.new(0, 170, 0, 50)
+Button8.Font = Enum.Font.Cartoon
+Button8.Text = "Rename Me!"
+Button8.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button8.TextScaled = true
+Button8.TextSize = 14.000
+Button8.TextWrapped = true
+Button8.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_13.Parent = Button8
+UIStroke_13.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_13.Thickness = 1.100
+UIStroke_13.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_12.Parent = Button8
+
+Button9.Name = "Button9"
+Button9.Parent = ScriptsScrollingFrame
+Button9.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button9.BackgroundTransparency = 0.800
+Button9.Position = UDim2.new(0.0284973681, 0, 0.411099017, 0)
+Button9.Size = UDim2.new(0, 170, 0, 50)
+Button9.Font = Enum.Font.Cartoon
+Button9.Text = "Rename Me!"
+Button9.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button9.TextScaled = true
+Button9.TextSize = 14.000
+Button9.TextWrapped = true
+Button9.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_14.Parent = Button9
+UIStroke_14.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_14.Thickness = 1.100
+UIStroke_14.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_13.Parent = Button9
+
+Button10.Name = "Button10"
+Button10.Parent = ScriptsScrollingFrame
+Button10.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button10.BackgroundTransparency = 0.800
+Button10.Position = UDim2.new(0.49999997, 0, 0.411099017, 0)
+Button10.Size = UDim2.new(0, 170, 0, 50)
+Button10.Font = Enum.Font.Cartoon
+Button10.Text = "Rename Me!"
+Button10.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button10.TextScaled = true
+Button10.TextSize = 14.000
+Button10.TextWrapped = true
+Button10.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_15.Parent = Button10
+UIStroke_15.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_15.Thickness = 1.100
+UIStroke_15.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_14.Parent = Button10
+
+--Do not edit this! Seperator is fine how it is! Unless you want to tinker with the text!
+--Don't forget to edit the properties for the button name!
+
+SeperatorInfo1.Name = "SeperatorInfo1"
+SeperatorInfo1.Parent = ScriptsScrollingFrame
+SeperatorInfo1.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+SeperatorInfo1.BackgroundTransparency = 0.800
+SeperatorInfo1.Position = UDim2.new(0.0284974091, 0, 0.858805954, 0)
+SeperatorInfo1.Size = UDim2.new(0, 351, 0, 51)
+SeperatorInfo1.Font = Enum.Font.Cartoon
+SeperatorInfo1.Text = "More Coming soon!"
+SeperatorInfo1.TextColor3 = Color3.fromRGB(255, 222, 189)
+SeperatorInfo1.TextScaled = true
+SeperatorInfo1.TextSize = 14.000
+SeperatorInfo1.TextWrapped = true
+
+UICorner_15.Parent = SeperatorInfo1
+
+UIStroke_16.Parent = SeperatorInfo1
+UIStroke_16.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_16.Thickness = 1.500
+UIStroke_16.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+--Buttons might be disordered but in the GUI it isnt, follow the number order!
+
+Button12.Name = "Button12"
+Button12.Parent = ScriptsScrollingFrame
+Button12.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button12.BackgroundTransparency = 0.800
+Button12.Position = UDim2.new(0.497409284, 0, 0.506337106, 0)
+Button12.Size = UDim2.new(0, 170, 0, 50)
+Button12.Font = Enum.Font.Cartoon
+Button12.Text = "Rename Me!"
+Button12.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button12.TextScaled = true
+Button12.TextSize = 14.000
+Button12.TextWrapped = true
+Button12.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_17.Parent = Button12
+UIStroke_17.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_17.Thickness = 1.100
+UIStroke_17.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_16.Parent = Button12
+
+Button11.Name = "Button11"
+Button11.Parent = ScriptsScrollingFrame
+Button11.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button11.BackgroundTransparency = 0.800
+Button11.Position = UDim2.new(0.0259066951, 0, 0.506337106, 0)
+Button11.Size = UDim2.new(0, 170, 0, 50)
+Button11.Font = Enum.Font.Cartoon
+Button11.Text = "Rename Me!"
+Button11.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button11.TextScaled = true
+Button11.TextSize = 14.000
+Button11.TextWrapped = true
+Button11.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_18.Parent = Button11
+UIStroke_18.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_18.Thickness = 1.100
+UIStroke_18.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_17.Parent = Button11
+
+Button13.Name = "Button13"
+Button13.Parent = ScriptsScrollingFrame
+Button13.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button13.BackgroundTransparency = 0.800
+Button13.Position = UDim2.new(0.0284973681, 0, 0.604749858, 0)
+Button13.Size = UDim2.new(0, 170, 0, 50)
+Button13.Font = Enum.Font.Cartoon
+Button13.Text = "Rename Me!"
+Button13.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button13.TextScaled = true
+Button13.TextSize = 14.000
+Button13.TextWrapped = true
+Button13.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_19.Parent = Button13
+UIStroke_19.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_19.Thickness = 1.100
+UIStroke_19.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_18.Parent = Button13
+
+Button14.Name = "Button14"
+Button14.Parent = ScriptsScrollingFrame
+Button14.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button14.BackgroundTransparency = 0.800
+Button14.Position = UDim2.new(0.49999997, 0, 0.604749858, 0)
+Button14.Size = UDim2.new(0, 170, 0, 50)
+Button14.Font = Enum.Font.Cartoon
+Button14.Text = "Rename Me!"
+Button14.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button14.TextScaled = true
+Button14.TextSize = 14.000
+Button14.TextWrapped = true
+Button14.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+UIStroke_20.Parent = Button14
+UIStroke_20.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_20.Thickness = 1.100
+UIStroke_20.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_19.Parent = Button14
+
+Button15.Name = "Button15"
+Button15.Parent = ScriptsScrollingFrame
+Button15.BackgroundColor3 = Color3.fromRGB(139, 77, 66)
+Button15.BackgroundTransparency = 0.800
+Button15.Position = UDim2.new(0.264248699, 0, 0.707924426, 0)
+Button15.Size = UDim2.new(0, 170, 0, 50)
+Button15.Font = Enum.Font.Cartoon
+Button15.Text = "Rename Me!"
+Button15.TextColor3 = Color3.fromRGB(255, 222, 189)
+Button15.TextScaled = true
+Button15.TextSize = 14.000
+Button15.TextWrapped = true
+Button15.MouseButton1Down:connect(function()
+	print("Script Here!")
+end)
+
+--Do not tinker below here!
+
+UIStroke_21.Parent = Button15
+UIStroke_21.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_21.Thickness = 1.100
+UIStroke_21.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_20.Parent = Button15
+
+UIAspectRatioConstraint_2.Parent = ScriptsScrollingFrame
+UIAspectRatioConstraint_2.AspectRatio = 1.166
+
+ExitButton.Name = "ExitButton"
+ExitButton.Parent = MainFrame
+ExitButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ExitButton.Position = UDim2.new(0.0286023319, 0, 0.0157773793, 0)
+ExitButton.Size = UDim2.new(0, 50, 0, 50)
+ExitButton.Image = "http://www.roblox.com/asset/?id=10711287694"
+ExitButton.MouseButton1Down:connect(function()
+	MainFrame.Visible = false
+	OpenUIFrame.Visible = true
+end)
+
+
+UIStroke_22.Parent = ExitButton
+UIStroke_22.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_22.Thickness = 2.000
+UIStroke_22.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UICorner_21.Parent = ExitButton
+
+UIAspectRatioConstraint_3.Parent = MainFrame
+UIAspectRatioConstraint_3.AspectRatio = 1.493
+
+OpenUIFrame.Name = "OpenUIFrame"
+OpenUIFrame.Parent = ScreenGui
+OpenUIFrame.BackgroundColor3 = Color3.fromRGB(255, 222, 189)
+OpenUIFrame.BackgroundTransparency = 1.000
+OpenUIFrame.Position = UDim2.new(0.00931391958, 0, 0.0149432868, 0)
+OpenUIFrame.Size = UDim2.new(0, 172, 0, 54)
+OpenUIFrame.Visible = false
+
+UICorner_22.Parent = OpenUIFrame
+
+UIStroke_23.Parent = OpenUIFrame
+UIStroke_23.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_23.Thickness = 2.000
+UIStroke_23.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+ButtonOpen.Name = "ButtonOpen"
+ButtonOpen.Parent = OpenUIFrame
+ButtonOpen.BackgroundColor3 = Color3.fromRGB(38, 17, 15)
+ButtonOpen.BackgroundTransparency = 0.250
+ButtonOpen.Position = UDim2.new(-0.00635852385, 0, -0.0416652523, 0)
+ButtonOpen.Size = UDim2.new(0, 172, 0, 54)
+ButtonOpen.Font = Enum.Font.Cartoon
+ButtonOpen.Text = "Open UI"
+ButtonOpen.TextColor3 = Color3.fromRGB(255, 222, 189)
+ButtonOpen.TextScaled = true
+ButtonOpen.TextSize = 14.000
+ButtonOpen.TextWrapped = true
+ButtonOpen.MouseButton1Down:connect(function()
+	MainFrame.Visible = true
+	OpenUIFrame.Visible = false
+end)
+
+UICorner_23.Parent = ButtonOpen
+
+UIStroke_24.Parent = ButtonOpen
+UIStroke_24.Color = Color3.fromRGB(255, 222, 189)
+UIStroke_24.Thickness = 2.000
+UIStroke_24.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+UIAspectRatioConstraint_4.Parent = OpenUIFrame
+UIAspectRatioConstraint_4.AspectRatio = 3.185
